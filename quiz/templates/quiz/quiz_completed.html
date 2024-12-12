@@ -1,10 +1,40 @@
-<h1>Quiz Completed - {{ category.name }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Completed - {{ category.name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
 
-<p>Total Questions: {{ correct_answers|add:incorrect_answers }}</p>
-<p>Correct Answers: {{ correct_answers }}</p>
-<p>Incorrect Answers: {{ incorrect_answers }}</p>
+    <div style="background-color: white; border-radius: 8px; padding: 40px; width: 100%; max-width: 800px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h1 style="color: #6A3C9C; font-size: 2.5rem;">Quiz Completed - {{ category.name }}</h1>
 
-<h3>Feedback:</h3>
-<p>{{ feedback }}</p>
+        <p style="font-size: 1.2rem; color: #333; margin-top: 20px;">
+            <strong>Total Questions:</strong> {{ correct_answers|add:incorrect_answers }}
+        </p>
+        <p style="font-size: 1.2rem; color: #333;">
+            <strong>Correct Answers:</strong> {{ correct_answers }}
+        </p>
+        <p style="font-size: 1.2rem; color: #333;">
+            <strong>Incorrect Answers:</strong> {{ incorrect_answers }}
+        </p>
 
-<a href="{% url 'start_quiz' category.id %}">Start Another Quiz</a>
+        <h3 style="font-size: 1.5rem; color: #333; margin-top: 30px;">Feedback:</h3>
+        <p style="font-size: 1.2rem; color: #555; margin-top: 10px;">{{ feedback }}</p>
+
+        <div style="margin-top: 30px;">
+            <a href="{% url 'start_quiz' category.id %}" style="padding: 10px 20px; background-color: #6A3C9C; color: white; border: none; border-radius: 5px; font-size: 1.2rem; text-decoration: none; cursor: pointer; transition: background-color 0.3s;">
+                Start Another Quiz
+            </a>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="{% url 'select_category' %}" style="font-size: 1.2rem; color: #6A3C9C; text-decoration: none; border: 2px solid #6A3C9C; padding: 10px 20px; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+                Back to Categories
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

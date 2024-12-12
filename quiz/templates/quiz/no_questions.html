@@ -1,3 +1,12 @@
-<h1>No Questions Available</h1>
-<p>There are no questions in the category "{{ category.name }}".</p>
-<a href="{% url 'select_category' %}">Back to Categories</a>
+<div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
+    <h1 style="font-size: 2.5rem; color: #ff4b5c; margin-bottom: 20px;">
+        No Questions Available
+    </h1>
+    <p style="font-size: 1.2rem; color: #555; margin-bottom: 30px;">
+        There are no questions in the category
+        <span style="font-weight: bold; color: #6a11cb;">"{{ category.name }}"</span>.
+    </p>
+    <a href="{% url 'select_category' %}" style="text-decoration: none; color: #fff; background-color: #6a11cb; padding: 10px 20px; border-radius: 8px; font-size: 1rem; font-weight: bold; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease;">
+        Back to Categories
+    </a>
+</div>

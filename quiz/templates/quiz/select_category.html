@@ -1,26 +1,44 @@
-<h1>Select a Category</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a category</title>
+</head>
+<body>
+    <h1 style="font-size: 2.5rem; margin-bottom: 10px; text-align: center;">Welcome to QuizMaster</h1>
+<p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center; color: black;">
+    Choose a category to start your quiz adventure!
+</p>
 
-<ul>
-    {% for category in categories %}
-        <li>
-            <a href="{% url 'start_quiz' category.id %}">
-                {{ category.name }}
-            </a>
+<div style="display: flex; justify-content: center;">
+    <ul style="list-style: none; padding: 0; margin: 0; width: 100%; max-width: 500px;">
+        {% for category in categories %}
+            <li style="background: #fff; border-radius: 8px; margin-bottom: 10px; padding: 15px; color: #333; font-size: 1.2rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <a href="{% url 'start_quiz' category.id %}" style="text-decoration: none; color: #6a11cb; font-weight: bold; display: block;">
+                    {{ category.name }}
+                </a>
 
-            {% if category.subcategories.exists %}
-                <ul>
-                    {% for sub in category.subcategories.all %}
-                        <li>
-                            <a href="{% url 'start_quiz' sub.id %}">{{ sub.name }}</a>
-                            {% if sub.subcategories.exists %}
-                                <ul>
-                                    {% include 'quiz/select_category_subcategories.html' with categories=sub.subcategories.all %}
-                                </ul>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+                {% if category.subcategories.exists %}
+                    <ul style="list-style: none; padding-left: 20px; margin: 10px 0 0 0; background: #f9f9f9; border-radius: 5px; padding: 10px;">
+                        {% for sub in category.subcategories.all %}
+                            <li style="margin-bottom: 5px;">
+                                <a href="{% url 'start_quiz' sub.id %}" style="text-decoration: none; color: #2575fc; font-weight: normal; display: block;">
+                                    {{ sub.name }}
+                                </a>
+                                {% if sub.subcategories.exists %}
+                                    <ul style="list-style: none; padding-left: 20px; margin: 10px 0 0 0; background: #f9f9f9; border-radius: 5px; padding: 10px;">
+                                        {% include 'quiz/select_category_subcategories.html' with categories=sub.subcategories.all %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

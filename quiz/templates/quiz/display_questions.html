@@ -1,29 +1,55 @@
-<h1>{{ category.name }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} Quiz</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
 
-{% if error_message %}
-    <p style="color: red;">{{ error_message }}</p>
-{% endif %}
+    <div style="background-color: white; border-radius: 8px; padding: 40px; width: 100%; max-width: 800px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center;">
+        <h1 style="color: #6A3C9C; font-size: 2.5rem;">{{ category.name }}</h1>
 
-<form method="post">
-    {% csrf_token %}
+        {% if error_message %}
+            <p style="color: red; font-size: 1.2rem; margin-top: 10px;">{{ error_message }}</p>
+        {% endif %}
 
-    {% for question in questions %}
-        <h2>{{ question.text }}</h2>
-        <ul>
-            {% for choice in question.choices.all %}
-                <li>
-                    <label>
-                        {% if question.question_type == 'SC' %}
-                            <input type="radio" name="answers_{{ question.id }}" value="{{ choice.id }}">
-                        {% else %}
-                            <input type="checkbox" name="answers_{{ question.id }}" value="{{ choice.id }}">
-                        {% endif %}
-                        {{ choice.text }}
-                    </label>
-                </li>
+        <form method="post" style="margin-top: 20px;">
+            {% csrf_token %}
+
+            {% for question in questions %}
+                <div style="margin-bottom: 20px; text-align: left;">
+                    <h2 style="font-size: 1.8rem; color: #333;">{{ question.text }}</h2>
+                    <ul style="list-style-type: none; padding: 0;">
+                        {% for choice in question.choices.all %}
+                            <li style="margin-bottom: 10px;">
+                                <label style="font-size: 1.2rem; color: #555;">
+                                    {% if question.question_type == 'SC' %}
+                                        <input type="radio" name="answers_{{ question.id }}" value="{{ choice.id }}" style="margin-right: 10px;">
+                                    {% else %}
+                                        <input type="checkbox" name="answers_{{ question.id }}" value="{{ choice.id }}" style="margin-right: 10px;">
+                                    {% endif %}
+                                    {{ choice.text }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endfor %}
-        </ul>
-    {% endfor %}
 
-    <button type="submit">Submit Answers</button>
-</form>
+            <div style="margin-top: 20px;">
+                <button type="submit" style="padding: 10px 20px; background-color: #6A3C9C; color: white; border: none; border-radius: 5px; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s;">
+                    Submit Answers
+                </button>
+            </div>
+        </form>
+
+        <div style="margin-top: 20px;">
+            <a href="{% url 'select_category' %}" style="font-size: 1.2rem; color: #6A3C9C; text-decoration: none; border: 2px solid #6A3C9C; padding: 10px 20px; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">
+                Back to Categories
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
