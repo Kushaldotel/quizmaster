@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
 
 class Category(models.Model):
     """
@@ -78,24 +77,3 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Answer for Question {self.question.id}: {self.choice.text}"
-
-
-class UserAnswer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Assuming you're using Django's built-in User model
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choices = models.ManyToManyField(Choice)  # User can select multiple choices (for multiple choice questions)
-    is_correct = models.BooleanField(default=False)  # To track if the answer is correct
-
-    def __str__(self):
-        return f"Answer for {self.user.username} on question {self.question.text}"
-
-class QuizResult(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    total_questions = models.PositiveIntegerField()
-    correct_answers = models.PositiveIntegerField()
-    score = models.FloatField()
-    feedback = models.TextField()
-
-    def __str__(self):
-        return f"Result for {self.user.username} in {self.category.name} quiz"
