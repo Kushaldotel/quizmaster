@@ -1,0 +1,10 @@
+{% for sub in categories %}
+    <li>
+        <a href="{% url 'start_quiz' sub.id %}">{{ sub.name }}</a>
+        {% if sub.subcategories.exists %}
+            <ul>
+                {% include 'quiz/select_category_subcategories.html' with categories=sub.subcategories.all %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

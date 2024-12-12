@@ -1,0 +1,26 @@
+<h1>Select a Category</h1>
+
+<ul>
+    {% for category in categories %}
+        <li>
+            <a href="{% url 'start_quiz' category.id %}">
+                {{ category.name }}
+            </a>
+
+            {% if category.subcategories.exists %}
+                <ul>
+                    {% for sub in category.subcategories.all %}
+                        <li>
+                            <a href="{% url 'start_quiz' sub.id %}">{{ sub.name }}</a>
+                            {% if sub.subcategories.exists %}
+                                <ul>
+                                    {% include 'quiz/select_category_subcategories.html' with categories=sub.subcategories.all %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

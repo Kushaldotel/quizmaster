@@ -1,0 +1,10 @@
+<h1>Quiz Completed - {{ category.name }}</h1>
+
+<p>Total Questions: {{ correct_answers|add:incorrect_answers }}</p>
+<p>Correct Answers: {{ correct_answers }}</p>
+<p>Incorrect Answers: {{ incorrect_answers }}</p>
+
+<h3>Feedback:</h3>
+<p>{{ feedback }}</p>
+
+<a href="{% url 'start_quiz' category.id %}">Start Another Quiz</a>

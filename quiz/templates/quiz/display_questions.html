@@ -1,0 +1,29 @@
+<h1>{{ category.name }}</h1>
+
+{% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    {% for question in questions %}
+        <h2>{{ question.text }}</h2>
+        <ul>
+            {% for choice in question.choices.all %}
+                <li>
+                    <label>
+                        {% if question.question_type == 'SC' %}
+                            <input type="radio" name="answers_{{ question.id }}" value="{{ choice.id }}">
+                        {% else %}
+                            <input type="checkbox" name="answers_{{ question.id }}" value="{{ choice.id }}">
+                        {% endif %}
+                        {{ choice.text }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+    <button type="submit">Submit Answers</button>
+</form>
