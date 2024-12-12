@@ -24,7 +24,7 @@ This is a Django-based quiz application that allows users to take quizzes catego
 ### Installation
 1. Clone the repository:
    git clone https://github.com/Kushaldotel/quizmaster.git
-   cd quiz
+   cd QuizMaster
 
 2. Create a virtual environment:
    python -m venv env
