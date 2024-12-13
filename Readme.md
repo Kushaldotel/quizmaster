@@ -134,6 +134,8 @@ This is a Django-based quiz application that allows users to take quizzes catego
 - Add a timer for quizzes.
 - Enable the addition of images or media in questions.
 
+# Project Overview
+You can view [Click here to see solution_view.md](solution_view.md) for an overview of this project.
 
 
 Feel free to modify the content to suit your use case or contribute to the project!
